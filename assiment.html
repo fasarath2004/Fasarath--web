@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICST University Park</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Google Fonts for modern, attractive typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- Custom Top Header and Navigation Styles --- */
+    /* Logo Animation */
+    .logo-area img {
+      transition: transform 0.4s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.3s;
+    }
+    .logo-area img:hover {
+      transform: scale(1.12) rotate(-6deg);
+      box-shadow: 0 6px 24px #007bff33;
+    }
+
+    /* Header Button Pulse */
+    .header-buttons .red-btn, .header-buttons .call-btn {
+      animation: pulseBtn 2.2s infinite;
+    }
+    @keyframes pulseBtn {
+      0% { box-shadow: 0 0 0 0 #d32f2f44; }
+      70% { box-shadow: 0 0 0 10px #d32f2f00; }
+      100% { box-shadow: 0 0 0 0 #d32f2f00; }
+    }
+    .header-buttons .call-btn {
+      animation-delay: 1.1s;
+    }
+
+    /* Social Icon Hover Pop */
+    .social-icons img {
+      transition: filter 0.2s, transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .social-icons img:hover {
+      transform: scale(1.18) rotate(8deg);
+    }
+
+    /* Button Glow on Hover */
+    .btn:hover, .btn:focus, .btn:active {
+      box-shadow: 0 0 16px #007bff55;
+      background: #007bff;
+      color: #fff;
+      outline: none;
+    }
+
+    /* Admissions Form Animation */
+    .admissions-form {
+      animation: popIn 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.92) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Modal Pop Animation */
+    .modal-content {
+      animation: fadeIn 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    /* Section Title Underline */
+    h2, .admissions-title {
+      position: relative;
+      display: inline-block;
+    }
+    h2::after, .admissions-title::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, #007bff, #003366);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+      opacity: 0.18;
+    }
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f5f5f5;
+      padding: 10px 20px;
+      border-bottom: 1px solid #e0e0e0;
+      z-index: 1100;
+      position: relative;
+    }
+    .social-icons img {
+      width: 24px;
+      margin-right: 10px;
+      vertical-align: middle;
+      filter: grayscale(0.3);
+      transition: filter 0.2s;
+      cursor: pointer;
+    }
+    .social-icons img:hover {
+      filter: grayscale(0) drop-shadow(0 2px 4px #007bff33);
+    }
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      background: linear-gradient(90deg, #fff 0%, #e3f0ff 100%);
+      border-radius: 18px;
+      padding: 0.7rem 1.5rem;
+      box-shadow: 0 4px 24px #14285022, 0 1px 0 #fff8 inset;
+      border: 2.5px solid #e6b01233;
+      position: relative;
+    }
+    .logo-area img {
+      height: 64px;
+      filter: drop-shadow(0 4px 16px #a3263844) brightness(1.08) contrast(1.08);
+      background: #fff;
+      border-radius: 14px;
+      padding: 6px 14px;
+      transition: filter 0.3s, background 0.3s;
+      box-shadow: 0 2px 12px #e6b01233;
+    }
+    .logo-area img:hover {
+      filter: drop-shadow(0 8px 32px #e6b01266) brightness(1.15) contrast(1.15);
+      background: #f8f9fa;
+    }
+    .logo-area h1 {
+      font-size: 1.35rem;
+      margin: 0;
+      color: #142850;
+      letter-spacing: 2px;
+      font-weight: 900;
+      font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+      background: linear-gradient(90deg, #142850 0%, #a32638 60%, #e6b012 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      text-shadow: 0 2px 12px #e6b01222;
+      transition: background 0.3s, text-shadow 0.3s;
+    }
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .red-btn, .call-btn {
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .red-btn:hover, .call-btn:hover {
+      background-color: #b71c1c;
+    }
+    .call-btn {
+      background-color: #007bff;
+    }
+    .call-btn:hover {
+      background-color: #0056b3;
+    }
+    .header-buttons span {
+      font-size: 1.3rem;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .main-nav {
+      background: rgba(20,40,80,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 3px solid #e6b012;
+      box-shadow: 0 2px 12px #14285022;
+    }
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      margin: 0;
+      gap: 0.5rem;
+    }
+    .main-nav li {
+      margin: 0 15px;
+    }
+    .main-nav a {
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 8px 22px;
+      border-radius: 8px;
+      margin: 0 2px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    .main-nav a.active, .main-nav a:hover {
+      background: linear-gradient(90deg, #e6b012 0%, #a32638 100%);
+      color: #fff;
+      box-shadow: 0 2px 16px #e6b01233;
+      text-shadow: 0 1px 4px #14285033;
+    }
+    .main-nav .top-links {
+      border-bottom: 1px solid #444;
+      margin-bottom: -5px;
+    }
+    .main-nav .bottom-links {
+      margin-top: -5px;
+    }
+    @media (max-width: 900px) {
+      .top-header, .main-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .main-nav ul {
+        gap: 0;
+      }
+      .main-nav li {
+        margin: 0 0 8px 0;
+      }
+      .logo-area h1 {
+        font-size: 1rem;
+      }
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f8fafc 0%, #e3f0ff 100%);
+      color: #232946;
+      letter-spacing: 0.01em;
+    }
+
+    header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, #003366, #007bff);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn, .hero-btn, .admissions-form button {
+      background: linear-gradient(90deg, #ff6f61 0%, #16a085 100%);
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 16px #ff6f6133;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover, .hero-btn:hover, .admissions-form button:hover {
+      background: linear-gradient(90deg, #16a085 0%, #ff6f61 100%);
+      color: #fff;
+      box-shadow: 0 8px 24px #16a08555;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 3rem 1rem;
+      background: #f9f9f9;
+      gap: 2rem;
+    }
+
+
+    .feature {
+      background: #fff;
+      backdrop-filter: blur(8px) saturate(1.2);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      margin: 1.5rem;
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      width: 280px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 8px 32px #16a08522, 0 2px 8px #e67e2211;
+      border: 2px solid #e67e22;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.32s, border 0.22s, background 0.22s;
+      flex-shrink: 0;
+    }
+
+    .feature-icon-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.2rem auto;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+      box-shadow: 0 2px 12px #16a08522, 0 1px 0 #fff8 inset;
+      border: 2.5px solid #e67e22;
+      position: relative;
+      z-index: 3;
+      transition: box-shadow 0.22s, border 0.22s, background 0.22s;
+    }
+
+    .feature:hover .feature-icon-box,
+    .feature:focus-within .feature-icon-box,
+    .feature:active .feature-icon-box {
+      background: linear-gradient(135deg, #16a085 0%, #e67e22 100%);
+      box-shadow: 0 4px 24px #e67e2255, 0 2px 8px #16a08522;
+      border: 2.5px solid #16a085;
+    }
+
+    .feature-icon-box i {
+      font-size: 2.5rem;
+      color: #e67e22;
+      transition: color 0.22s, filter 0.22s, text-shadow 0.22s;
+      filter: drop-shadow(0 2px 8px #e67e2222);
+      animation: none;
+    }
+
+    .feature:hover .feature-icon-box i,
+    .feature:focus-within .feature-icon-box i,
+    .feature:active .feature-icon-box i {
+      color: #16a085;
+      filter: drop-shadow(0 4px 16px #fff) drop-shadow(0 2px 8px #16a08555);
+      animation: featureIconPulse 1.2s infinite alternate;
+      text-shadow: 0 2px 8px #16a08555;
+    }
+
+    .feature::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 7px;
+      background: linear-gradient(90deg, #e67e22 0%, #16a085 100%);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      z-index: 2;
+      opacity: 0.85;
+    }
+
+    .feature:hover, .feature:focus-within, .feature:active {
+      transform: translateY(-12px) scale(1.045);
+      background: rgba(230,126,34,0.10);
+      box-shadow: 0 12px 36px #e67e2233, 0 2px 8px #16a08522;
+      border: 2px solid #16a085;
+    }
+
+    .feature h3 {
+      font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: #16a085;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.2px;
+      z-index: 3;
+      position: relative;
+      text-shadow: 0 1px 0 #fff8, 0 2px 8px #16a08511;
+    }
+
+    .feature p {
+      font-size: 1.01rem;
+      color: #16a085;
+      font-weight: 500;
+      z-index: 3;
+      position: relative;
+      text-shadow: 0 1px 0 #fff8;
+    }
+
+    .feature:focus-within {
+      outline: 2.5px solid #e67e22;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .feature {
+        width: 98vw;
+        min-width: 220px;
+        max-width: 98vw;
+        margin: 0.7rem auto;
+      }
+    }
+
+    footer {
+      background: linear-gradient(90deg, #142850 0%, #a32638 100%);
+      color: #e6b012;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 3px solid #e6b012;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        display: none;
+      }
+
+      nav ul.active {
+        display: flex;
+        background: white;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      #menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    /* MODAL STYLES */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-content button:hover {
+      background: #0056b3;
+    }
+
+    .modal-content a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .admissions-section {
+      background: #f8f9fa;
+      padding: 2rem 1rem;
+      margin: 2rem auto;
+      border-radius: 12px;
+      max-width: 1100px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .admissions-title {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 1.5rem;
+    }
+    .admissions-intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      color: #222;
+      font-weight: 500;
+    }
+    .admissions-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .admissions-form {
+      flex: 1 1 420px;
+      min-width: 350px;
+      max-width: 500px;
+      background: linear-gradient(135deg, #fff 0%, #e3f0ff 100%);
+      border: 2.5px solid #ff6f61;
+      box-shadow: 0 12px 36px #ff6f6133, 0 2px 8px #00336611;
+      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      font-size: 1.13rem;
+      transition: box-shadow 0.2s, border 0.2s;
+    }
+    .admissions-form:focus-within {
+      box-shadow: 0 12px 36px #00336655, 0 2px 8px #00336622;
+      border-color: #007bff;
+    }
+    .admissions-form h3 {
+      color: #ff6f61;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.7rem;
+    }
+    .admissions-form input,
+    .admissions-form select,
+    .admissions-form textarea {
+      font-family: 'Roboto', 'Montserrat', Arial, sans-serif;
+      font-size: 1.05rem;
+      border: 1.5px solid #ff6f61;
+      border-radius: 7px;
+      padding: 0.85rem 1.1rem;
+      background: #f7faff;
+      transition: border 0.2s, box-shadow 0.2s;
+      color: #232946;
+    }
+    .admissions-form input:focus,
+    .admissions-form select:focus,
+    .admissions-form textarea:focus {
+      border-color: #e6b012;
+      box-shadow: 0 0 0 2px #e6b01233;
+      outline: none;
+    }
+    .admissions-form button {
+      background: linear-gradient(90deg, #e6b012 0%, #a32638 100%);
+      color: #fff;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px #e6b01233;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+    .admissions-form button:hover, .admissions-form button:focus {
+      background: linear-gradient(90deg, #a32638 0%, #e6b012 100%);
+      color: #fff;
+      box-shadow: 0 8px 24px #a3263855;
+      outline: none;
+    }
+    .admission-message {
+      color: #28a745;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+    .admissions-info {
+      flex: 2 1 350px;
+      min-width: 300px;
+    }
+    @media (max-width: 900px) {
+      .admissions-flex {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .admissions-info {
+        min-width: 0;
+      }
+    }
+
+    .admission-bonus {
+      background: linear-gradient(90deg, #fffde7 0%, #e3f0ff 100%);
+      color: #ff6f61;
+      border-left: 5px solid #16a085;
+      font-weight: 600;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    }
+    .admission-highlight {
+      background: #fffde7;
+      color: #ff9800;
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 8px rgba(255,193,7,0.07);
+    }
+
+    #about {
+      background: #fff;
+      padding: 2rem 1rem;
+      margin: 2rem auto;
+      border-radius: 12px;
+      max-width: 1100px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    #about h2 {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 1.5rem;
+    }
+    #about p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    /* --- Add at the end of your <style> section or in a new <style> tag --- */
+
+    /* 1. Soft background gradient for the whole page */
+    body {
+      background: linear-gradient(120deg, #e3f0ff 0%, #f8f9fa 100%);
+    }
+
+    /* 2. Glassmorphism effect for cards and features */
+    .feature, .program-box, .campus-card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px) saturate(1.2);
+      -webkit-backdrop-filter: blur(6px) saturate(1.2);
+      border: 2px solid rgba(230,126,34,0.13);
+      box-shadow: 0 8px 32px #16a08522, 0 2px 8px #e67e2211;
+    }
+
+    /* 3. Add a subtle hover lift and shadow to all cards */
+    .feature:hover, .program-box:hover, .campus-card:hover {
+      box-shadow: 0 16px 48px #16a08533, 0 4px 16px #e67e2233;
+      transform: translateY(-10px) scale(1.04);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    /* 4. Animated underline for section titles */
+    h2, .admissions-title {
+      position: relative;
+      overflow: visible;
+    }
+    h2::after, .admissions-title::after {
+      content: '';
+      display: block;
+      margin: 0.5rem auto 0;
+      width: 80px;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #e67e22, #16a085);
+      animation: underlineGrow 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes underlineGrow {
+      from { width: 0; opacity: 0.2; }
+      to { width: 80px; opacity: 1; }
+    }
+
+    /* 5. Add a floating "Back to Top" button */
+    #backToTop {
+      display: none;
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 9999;
+      background: linear-gradient(135deg, #16a085 0%, #e67e22 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px #00336644;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    #backToTop:hover {
+      background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+      box-shadow: 0 8px 24px #16a08555;
+    }
+
+    .hero-bg {
+      width: 100vw;
+      max-width: 100%;
+      height: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('https://media.licdn.com/dms/image/v2/D563DAQFSUwQzcwPlJw/image-scale_191_1128/image-scale_191_1128/0/1712123320555/icst_university_park_cover?e=2147483647&v=beta&t=viK0MNYQJ9XaI0gqnDwLb51R9pIlvJnn2qY_FAQJDgI') center center/cover no-repeat;
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+      box-shadow: 0 12px 48px #00336633, 0 2px 8px #00336622;
+      overflow: hidden;
+    }
+    .hero-bg-overlay {
+      background: linear-gradient(120deg,rgba(20,40,80,0.55) 0%,rgba(163,38,56,0.22) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    /* Add these CSS variables at the top of your <style> section for easy color management */
+    :root {
+      --icst-blue: #142850;
+      --icst-maroon: #a32638;
+      --icst-gold: #e6b012;
+      --icst-light: #f8f9fa;
+      --icst-dark: #232946;
+    }
+
+    /* Example usage for main elements */
+    body {
+      background: linear-gradient(120deg, var(--icst-light) 0%, #e3f0ff 100%);
+      color: var(--icst-dark);
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    }
+
+    .logo-area h1 {
+      background: linear-gradient(90deg, var(--icst-blue) 0%, var(--icst-maroon) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      text-shadow: 0 2px 8px var(--icst-blue)22;
+    }
+
+    .main-nav {
+      background: rgba(20,40,80,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 3px solid #e6b012;
+      box-shadow: 0 2px 12px #14285022;
+    }
+
+    .main-nav a {
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 8px 22px;
+      border-radius: 8px;
+      margin: 0 2px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    .main-nav a.active, .main-nav a:hover {
+      background: linear-gradient(90deg, #e6b012 0%, #a32638 100%);
+      color: #fff;
+      box-shadow: 0 2px 16px #e6b01233;
+      text-shadow: 0 1px 4px #14285033;
+    }
+
+    .btn, .hero-btn, .admissions-form button {
+      background: linear-gradient(90deg, var(--icst-maroon) 0%, var(--icst-gold) 100%);
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 16px var(--icst-maroon)33;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover, .hero-btn:hover, .admissions-form button:hover {
+      background: linear-gradient(90deg, var(--icst-blue) 0%, var(--icst-gold) 100%);
+      color: #fff;
+      box-shadow: 0 8px 24px var(--icst-blue)55;
+    }
+
+    /* Admissions form and cards */
+    .admissions-form {
+      background: linear-gradient(135deg, #fff 0%, #e3f0ff 100%);
+      border: 2.5px solid var(--icst-maroon);
+      box-shadow: 0 12px 36px var(--icst-maroon)33, 0 2px 8px var(--icst-blue)11;
+    }
+
+    .admissions-form input,
+    .admissions-form select,
+    .admissions-form textarea {
+      border: 1.5px solid var(--icst-maroon);
+      border-radius: 7px;
+      background: #f7faff;
+      color: var(--icst-dark);
+    }
+
+    .admissions-form input:focus,
+    .admissions-form select:focus,
+    .admissions-form textarea:focus {
+      border-color: var(--icst-gold);
+      box-shadow: 0 0 0 2px var(--icst-gold)33;
+      outline: none;
+    }
+
+    .admissions-form h3 {
+      color: var(--icst-maroon);
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.7rem;
+    }
+
+    /* Section Titles */
+    h2, .admissions-title {
+      color: #142850;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    h2::after, .admissions-title::after {
+      background: linear-gradient(90deg, #e6b012, #142850);
+      height: 5px;
+      border-radius: 3px;
+      opacity: 0.35;
+    }
+
+    /* Update other accent colors as needed using the variables above */
+    .program-box, .campus-card {
+      border: 2.5px solid #e6b012;
+      box-shadow: 0 8px 32px #14285022, 0 2px 8px #e6b01211;
+      background: rgba(255,255,255,0.92);
+    }
+    .program-box:hover, .campus-card:hover, .program-box:focus-within, .campus-card:focus-within {
+      background: linear-gradient(135deg, #e6b012 0%, #a32638 100%);
+      border: 2.5px solid #a32638;
+      color: #fff;
+      box-shadow: 0 16px 48px #a3263833, 0 4px 16px #e6b01233;
+    }
+    .program-box h3, .campus-card-content h3 {
+      color: #a32638;
+      font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .program-box .program-sub, .campus-features-list li {
+      color: #e6b012;
+      font-weight: 700;
+    }
+
+    /* --- Add below your existing .campus-card-img styles or at the end of your CSS --- */
+
+    /* Image pop-in animation for campus photos */
+    @keyframes campusImgPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(30px);
+        filter: blur(4px) brightness(1.2);
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1.04) translateY(-6px);
+        filter: blur(0.5px) brightness(1.05);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0) brightness(1);
+      }
+    }
+    .campus-card-img {
+      animation: campusImgPop 0.9s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    /* Card hover lift and glow */
+    .campus-card {
+      transition: transform 0.32s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.32s, border 0.22s, background 0.22s;
+    }
+    .campus-card:hover, .campus-card:focus-within, .campus-card:active {
+      transform: translateY(-12px) scale(1.045);
+      box-shadow: 0 12px 36px #16a08533, 0 2px 8px #ff6f6122;
+      border: 2px solid #ff6f61;
+      background: linear-gradient(135deg, #16a085 0%, #ff6f61 100%);
+      color: #fff;
+    }
+    .campus-card:hover .campus-card-img,
+    .campus-card:focus-within .campus-card-img,
+    .campus-card:active .campus-card-img {
+      filter: brightness(1.08) saturate(1.15) drop-shadow(0 4px 16px #ff6f6133);
+      transition: filter 0.3s;
+    }
+
+    /* Icon bounce on hover */
+    .campus-card:hover .campus-card-icon,
+    .campus-card:focus-within .campus-card-icon,
+    .campus-card:active .campus-card-icon {
+      animation: campusIconBounce 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes campusIconBounce {
+      0% { transform: scale(1) rotate(0deg);}
+      30% { transform: scale(1.18) rotate(-8deg);}
+      60% { transform: scale(0.98) rotate(6deg);}
+      100% { transform: scale(1) rotate(0deg);}
+    }
+
+    @media (max-width: 900px) {
+      #hamburger { display: block !important; }
+      .main-nav .bottom-links {
+        display: none;
+        flex-direction: column;
+        background: #222;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        width: 100vw;
+        z-index: 1200;
+        padding: 1rem 0;
+      }
+      .main-nav .bottom-links.active {
+        display: flex;
+      }
+    }
+    </style>
+</head>
+<body>
+
+<!-- New Top Header and Navigation -->
+<div class="top-header">
+  <div class="social-icons" aria-label="Social media links"></div>
+  <div class="logo-area">
+    <img src="https://icst.edu.lk/wp-content/uploads/2023/11/ICST-Logo-Final-Horizontal@4x-1024x432.png" alt="ICST University Park Logo" />
+    <h1>INTERNATIONAL CAMPUS OF SCIENCE AND TECHNOLOGY</h1>
+  </div>
+  <div class="header-buttons"></div>
+</div>
+<nav class="main-nav" aria-label="Main navigation">
+  <button id="hamburger" aria-label="Open menu" style="display:none;background:none;border:none;color:#fff;font-size:2rem;position:absolute;left:20px;top:10px;z-index:1200;">
+    <i class="fas fa-bars"></i>
+  </button>
+  <ul class="top-links"></ul>
+  <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <form class="nav-search-bar" role="search" style="margin-right:1.5rem;display:flex;align-items:center;position:relative;">
+      <button type="button" id="nav-search-icon" aria-label="Search">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+    <ul class="bottom-links" style="margin:0;">
+      <li><a href="#home" class="active" aria-current="page">Home</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#campus">Campus Life</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#admissions">Admissions</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-overlay">
+      <h1 class="hero-animate-text">Welcome to ICST University Park</h1>
+      <p class="hero-animate-text">Empowering the next generation of leaders, innovators, and thinkers.</p>
+      <a href="#admissions" class="btn hero-btn">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION (add after HERO SECTION, before PROGRAMS or CAMPUS LIFE) -->
+<section id="About" class="container" style="background:#fff;padding:2rem 1rem 2.5rem 1rem;margin:2rem auto 2.5rem auto;border-radius:14px;box-shadow:0 2px 8px #00336611;max-width:1100px;">
+  <h2 style="text-align:center;font-size:2.3rem;color:#142850;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;margin-bottom:2.2rem;text-transform:uppercase;">
+    About ICST University Park
+  </h2>
+  <div style="display:flex;flex-wrap:wrap;gap:2.5rem;align-items:flex-start;justify-content:center;">
+    <div style="flex:1 1 120px;min-width:120px;max-width:160px;display:flex;justify-content:center;align-items:flex-start;">
+      <img src="https://icst.edu.lk/wp-content/uploads/2023/11/ICST-Logo-Final-Horizontal@4x-1024x432.png" alt="ICST University Park Logo" style="width:120px;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 2px 8px #e6b01233;">
+    </div>
+    <div style="flex:4 1 350px;min-width:250px;">
+      <p style="font-size:1.15rem;line-height:1.7;color:#232946;font-family:'Roboto','Segoe UI',Arial,sans-serif;">
+        <b>ICST University Park</b> is a visionary institution dedicated to transforming lives through accessible, job-oriented higher education. Established with the mission to break down socio-economic barriers, ICST provides a world-class learning environment for students from all backgrounds. Our campus features modern infrastructure, cutting-edge technology, and a vibrant community that fosters innovation, leadership, and personal growth.<br><br>
+        <b>Our Commitment:</b> We believe in inclusivity, community engagement, and social responsibility. ICST partners with local and global organizations to offer scholarships, internships, and exchange programs, ensuring every student has the opportunity to excel.<br><br>
+        <b>Academic Excellence:</b> Our programs are designed to meet industry needs, blending rigorous academics with practical experience. Students benefit from expert faculty, state-of-the-art labs, and a supportive environment that encourages research, creativity, and entrepreneurship.<br><br>
+        <b>Campus Life:</b> Beyond academics, ICST offers a dynamic campus life with clubs, sports, cultural events, and wellness programs, creating a holistic educational experience.<br><br>
+        <b>Join us at ICST University Park</b> and become part of a community that values knowledge, innovation, and positive social impact.
+      </p>
+    </div>
+  </div>
+  <hr style="margin:2.5rem 0 2rem 0;border:0;border-top:1.5px solid #e6b01233;">
+  <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;justify-content:center;">
+    <div style="flex:1 1 90px;min-width:90px;max-width:120px;display:flex;justify-content:center;align-items:flex-start;">
+      <img src="https://www.onlanka.com/wp-content/uploads/2019/05/mlam-hizbullah-300x184.jpg" alt="Founder of ICST" style="width:90px;height:90px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px #007bff22;">
+    </div>
+    <div style="flex:4 1 350px;min-width:250px;">
+      <strong style="font-size:1.1rem;">Dr. M.L.A.M. Hizbullah</strong><br>
+      <span style="color:#007bff;font-weight:500;">Founder & Visionary</span>
+      <div style="margin-top:1rem;font-size:1.08rem;color:#003366;background:#f8f9fa;padding:1.2rem 1.2rem 1.2rem 1.5rem;border-radius:8px;box-shadow:0 2px 8px #007bff11;">
+        <strong style="text-transform:uppercase;">Founder's Vision</strong><br>
+        The founding vision of ICST is rooted in the belief that higher education should be a transformative force capable of breaking down socio-economic barriers. ICST was established with the explicit purpose of providing job-oriented higher education for those with limited financial means, creating an environment where every aspiring student, regardless of their economic background, can access quality education and embark on a journey of enfranchisement.<br><br>
+        The founder envisioned a university with inclusivity that ensures students from economically disadvantaged backgrounds have equal opportunities to pursue higher education.<br><br>
+        The founder believes in the power of community support. ICST actively engages with local communities, businesses, and philanthropic organizations to establish partnerships that further support our mission.<br><br>
+        To create a conducive learning environment, the founder prioritized the establishment of physical and infrastructure facilities with cutting-edge technology, architectural marvel, and esthetic appeal of a world-class learning environment.<br><br>
+        The founder’s vision is a commitment to social responsibility too. ICST engages in initiatives that address societal challenges, contributing to the betterment of communities and emphasizing the role of higher education in creating positive social change, and contributing towards human resources development of our country.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs" class="container" style="background:#fff;padding:2rem 1rem;margin:2rem auto;border-radius:12px;max-width:1100px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+  <h2 style="display:block;width:100%;text-align:center;font-size:2.3rem;color:#e67e22;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;margin-bottom:2.2rem;text-transform:uppercase;">Academic Programs</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+    <div class="program-box" tabindex="0" data-program="hdit">
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-laptop-code"></i></div>
+      <h3>HDIT<br><span class="program-sub">Higher Diploma in Information Technology</span></h3>
+      <ul><li>Software Development</li><li>Networking</li><li>Database Management</li></ul>
+      <div class="program-details">
+        <strong>Program Details:</strong><br>
+        <ul>
+          <li>Duration: 2 Years (Full Time)</li>
+          <li>Eligibility: A/L or equivalent</li>
+          <li>Career Paths: After topup (Software Engineer, Network Engineer, cyber Securityre, AI Engineer)</li>
+          <li>Highlights: Industry projects, internship, modern labs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="program-box" tabindex="0" data-program="hdqs">
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-hard-hat"></i></div>
+      <h3>HDQS<br><span class="program-sub">Higher Diploma in Quantity Surveying</span></h3>
+      <ul><li>Construction Management</li><li>Cost Estimation</li><li>Project Planning</li></ul>
+      <div class="program-details">
+        <strong>Program Details:</strong><br>
+        <ul>
+          <li>Duration: 2 Years (Full Time)</li>
+          <li>Eligibility: A/L or equivalent</li>
+          <li>Career Paths: Quantity Surveyor, Cost Consultant, Site Manager</li>
+          <li>Highlights: Field visits, industry tie-ups, project-based learning</li>
+        </ul>
+      </div>
+    </div>
+    <div class="program-box" tabindex="0" data-program="acca">
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-calculator"></i></div>
+      <h3>ACCA<br><span class="program-sub">Association of Chartered Certified Accountants</span></h3>
+      <ul><li>Financial Accounting</li><li>Management Accounting</li><li>Taxation</li></ul>
+      <div class="program-details">
+        <strong>Program Details:</strong><br>
+        <ul>
+          <li>Duration: 2-3 Years (Flexible)</li>
+          <li>Eligibility: A/L or equivalent</li>
+          <li>Career Paths: Chartered Accountant, Auditor, Finance Manager</li>
+          <li>Highlights: Global recognition, exam support, internship</li>
+        </ul>
+      </div>
+    </div>
+    <div class="program-box" tabindex="0" data-program="bait">
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-robot"></i></div>
+      <h3>BAIT<br><span class="program-sub">Bachelor of Applied in Information Technology</span></h3>
+      <ul><li>AI</li><li>IT Project Management</li><li>Cyber Security</li></ul>
+      <div class="program-details">
+        <strong>Program Details:</strong><br>
+        <ul>
+          <li>Duration: 3 Years (Full Time)</li>
+          <li>Eligibility: HDIT or A/L with IT background</li>
+          <li>Career Paths: IT Consultant, AI Engineer, Security Analyst</li>
+          <li>Highlights: Research projects, industry mentors, global exposure</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .program-box {
+    flex: 1 1 250px;
+    min-width: 250px;
+    max-width: 350px;
+    background: #f9f9f9;
+    padding: 2.2rem 1.5rem 1.7rem 1.5rem;
+    border-radius: 18px;
+    margin: 1rem 0.5rem;
+    box-shadow: 0 8px 32px #16a08522, 0 2px 8px #e67e2211;
+    border: 2px solid #e67e22;
+    position: relative;
+    text-align: center;
+    transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s, border 0.18s, background 0.18s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .program-box:hover, .program-box:focus-within, .program-box:active {
+    background: linear-gradient(135deg, #ff6f61 0%, #16a085 100%);
+    border: 2px solid #16a085;
+    color: #fff;
+  }
+  .program-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.1rem auto;
+    font-size: 2.2rem;
+    color: #fff;
+    box-shadow: 0 2px 12px #16a08522, 0 1px 0 #fff8 inset;
+    border: 2px solid #e67e22;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+  }
+  .program-box:hover .program-icon,
+  .program-box:focus-within .program-icon,
+  .program-box:active .program-icon {
+    background: linear-gradient(135deg, #16a085 0%, #e67e22 100%);
+    color: #fff;
+    box-shadow: 0 4px 24px #e67e2255, 0 2px 8px #16a08522;
+    border: 2px solid #16a085;
+  }
+  .program-box h3 {
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: #16a085;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.2px;
+    z-index: 3;
+    position: relative;
+    text-shadow: 0 1px 0 #fff8, 0 2px 8px #16a08511;
+    margin-top: 0.2rem;
+  }
+  .program-sub {
+    display: block;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #e67e22;
+    margin-top: 0.2rem;
+    letter-spacing: 0.1px;
+  }
+  .program-box ul {
+    margin: 1rem 0 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.01rem;
+    color: #16a085;
+    font-weight: 500;
+    z-index: 3;
+    position: relative;
+    text-shadow: 0 1px 0 #fff8;
+  }
+  .program-box ul li {
+    margin-bottom: 0.4rem;
+    padding-left: 0;
+    position: relative;
+  }
+  .program-box ul li:before {
+    content: '\2022';
+    color: #e67e22;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
+  @media (max-width: 900px) {
+    .program-box {
+      width: 98vw;
+      min-width: 220px;
+      max-width: 98vw;
+      margin: 0.7rem auto;
+    }
+  }
+</style>
+
+<style>
+  .program-details {
+    display: none;
+    background: #f9f9f9;
+    color: #16a085;
+    border-radius: 10px;
+    margin-top: 1.1rem;
+    padding: 1.1rem 1rem 1rem 1.2rem;
+    box-shadow: 0 2px 8px #e67e2211;
+    font-size: 1.01rem;
+    text-align: left;
+    transition: max-height 0.4s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.4s;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  .program-box.active .program-details {
+    display: block;
+    max-height: 400px;
+    opacity: 1;
+    animation: fadeIn 0.5s;
+  }
+  .program-box {
+    cursor: pointer;
+    position: relative;
+  }
+  .program-box:after {
+    content: '\25BC';
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 1.1rem;
+    color: #e67e2299;
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+  .program-box.active:after {
+    transform: rotate(180deg);
+    color: #16a085;
+  }
+  .program-box:focus {
+    outline: 2.5px solid #e67e22;
+    outline-offset: 2px;
+  }
+</style>
+
+<section id="admissions" class="container admissions-section">
+  <h2 class="admissions-title" style="display:block;width:100%;text-align:center;font-size:2.3rem;color:#16a085;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;margin-bottom:2.2rem;text-transform:uppercase;">Admissions</h2>
+  <p class="admissions-intro">
+    <span style="font-size:1.4rem;color:#e67e22;font-weight:700;">Apply Now & Unlock Your Future!</span><br>
+    Join ICST University Park and enjoy world-class faculty, a modern campus, global opportunities, and generous scholarships. Our admissions process is simple, supportive, and open to all passionate learners. <span style="color:#28a745;font-weight:600;">Early applicants get priority scholarships and a free welcome kit!</span>
+  </p>
+  <div class="admissions-flex">
+    <div class="admissions-info" style="margin-bottom:2rem;">
+      <h3 style="color:#e67e22;font-size:1.35rem;font-weight:900;letter-spacing:0.5px;margin-bottom:1rem;font-family:'Montserrat','Segoe UI',Arial,sans-serif;">Why Choose ICST?</h3>
+      <ul style="background:linear-gradient(135deg,#e3f0ff 0%,#b3c6ff 100%);border-radius:14px;padding:1.2rem 1.5rem 1.2rem 2.2rem;box-shadow:0 4px 16px #00336622;margin-bottom:1.2rem;font-size:1.08rem;color:#003366;font-family:'Montserrat','Segoe UI',Arial,sans-serif;list-style:square inside;">
+        <li><b>100% Placement Assistance</b></li>
+        <li><b>International Student Exchange Programs</b></li>
+        <li><b>Modern Labs & Digital Library</b></li>
+        <li><b>Merit & Sports Scholarships</b></li>
+        <li><b>Vibrant Campus Life & Clubs</b></li>
+        <li><b>Personalized Career Counseling</b></li>
+        <li><b>Safe & Supportive Environment</b></li>
+        <li style="color:#e67e22;font-weight:700;"><b>Free Welcome Kit for Early Applicants!</b></li>
+        <li style="color:#16a085;font-weight:700;"><b>Exclusive Internship Opportunities</b></li>
+      </ul>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:0;">
+    <form id="admissionForm" class="admissions-form">
+      <h3>Quick Application</h3>
+      <input type="text" id="admissionName" placeholder="Full Name" required>
+      <input type="email" id="admissionEmail" placeholder="Email Address" required>
+      <input type="tel" id="admissionPhone" placeholder="Phone Number" pattern="[0-9+\-\s]{7,15}" required>
+      <select id="admissionProgram" required>
+        <option value="">Select Program</option>
+        <option value="hdit">HDIT</option>
+        <option value="hdqs">HDQS</option>
+        <option value="acca">ACCA</option>
+        <option value="bait">BAIT</option>
+      </select>
+      <textarea id="admissionMessageBox" placeholder="Tell us why you want to join ICST (optional)" rows="3" style="resize:vertical;"></textarea>
+      <label style="display:flex;align-items:center;margin:0.7rem 0 0.3rem 0;font-size:0.98rem;">
+        <input type="checkbox" id="admissionAgree" required style="margin-right:8px;">
+        I agree to the <a href="#" style="color:#007bff;text-decoration:underline;margin-left:4px;">terms & privacy policy</a>
+      </label>
+      <button type="submit">Submit</button>
+      <p id="admissionMessage" class="admission-message"></p>
+      <div class="admission-bonus">
+        <i class="fas fa-gift" style="color:#ff9800;"></i> <b>Bonus:</b> All applicants receive a free campus tour & career counseling session!
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- CAMPUS LIFE SECTION (remove duplicate icons) -->
+<section id="campus" class="container campus-life-section">
+  <h2>Campus Life</h2>
+  <div class="campus-life-cards">
+    <!-- Student Experience Card -->
+    <div class="campus-card">
+      <img class="campus-card-img" src="https://media.licdn.com/dms/image/v2/D5622AQG0lxWbt9ZF1w/feedshare-shrink_800/B56ZYi4QlCHEAg-/0/1744341900438?e=2147483647&v=beta&t=W4QvAIEBxwpLK-R10TdNbGPwrQHL6ZJuqpNLwxT7FDI" alt="Student Experience Photo" />
+      <div class="campus-card-icon"><i class="fas fa-users"></i></div>
+      <div class="campus-card-content">
+        <h3>Student Experience</h3>
+        <p>Enjoy a vibrant campus with modern facilities, student clubs, sports, and cultural events. Our campus is designed for collaboration, creativity, and well-being.</p>
+      </div>
+    </div>
+    <!-- Facilities Card -->
+    <div class="campus-card">
+      <img class="campus-card-img" src="https://icst.edu.lk/wp-content/uploads/2023/12/08-scaled-480x320.jpg" alt="Facilities Photo" />
+      <div class="campus-card-icon"><i class="fas fa-building"></i></div>
+      <div class="campus-card-content">
+        <h3>Facilities</h3>
+        <ul class="campus-features-list">
+          <li><i class="fas fa-bed"></i> Modern Hostels</li>
+          <li><i class="fas fa-dumbbell"></i> Sports Complex</li>
+          <li><i class="fas fa-utensils"></i> Student Cafeteria</li>
+          <li><i class="fas fa-book"></i> 24/7 Library</li>
+          <li><i class="fas fa-flask"></i> Innovation & Research Centers</li>
+          <li><i class="fas fa-heartbeat"></i> Wellness Programs</li>
+          <li><i class="fas fa-users-cog"></i> Clubs & Societies</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Activities Card -->
+    <div class="campus-card">
+      <img class="campus-card-img" src="https://media.licdn.com/dms/image/v2/D5622AQFrUeqtnxAM2g/feedshare-shrink_800/B56ZZ_zWTMHgAg-/0/1745900902434?e=2147483647&v=beta&t=RFgZwdsiEVhVzyuEXFL6rRKdtnwHjbIt6tA3ys_1cJ8" alt="Campus Activities Photo" />
+      <div class="campus-card-icon"><i class="fas fa-calendar-alt"></i></div>
+      <div class="campus-card-content">
+        <h3>Campus Activities</h3>
+        <p>Participate in cultural festivals, tech competitions, leadership workshops, and community service projects. There’s always something happening at ICST!</p>
+      </div>
+    </div>
+    <!-- Support Services Card -->
+    <div class="campus-card">
+      <img class="campus-card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTke-dqJHupYpgFMs0F1orE3hsE2KyfT4eLuA&s" alt="Support Services Photo" />
+      <div class="campus-card-icon"><i class="fas fa-hands-helping"></i></div>
+      <div class="campus-card-content">
+        <h3>Support Services</h3>
+        <p>Benefit from dedicated support services, including counseling, career guidance, and a safe, inclusive environment for all students.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .campus-life-section {
+    background: #f9f9f9;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #16a08511;
+    margin-bottom: 2.5rem;
+  }
+  .campus-life-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .campus-card {
+    background: linear-gradient(135deg, #fff 0%, #e3f0ff 100%);
+    border: 2px solid #16a085;
+    box-shadow: 0 4px 16px #16a08522, 0 1px 0 #fff8 inset;
+    border-radius: 16px;
+    min-width: 260px;
+    max-width: 320px;
+    flex: 1 1 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.7rem 1.2rem 1.2rem 1.2rem;
+    position: relative;
+    transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s, border 0.18s, background 0.18s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .campus-card:hover, .campus-card:focus-within, .campus-card:active {
+    background: linear-gradient(135deg, #16a085 0%, #ff6f61 100%);
+    border: 2px solid #ff6f61;
+    color: #fff;
+  }
+  .campus-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    box-shadow: 0 2px 12px #16a08522, 0 1px 0 #fff8 inset;
+    border: 2px solid #e67e22;
+    margin-bottom: 1.1rem;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+  }
+  .campus-card:hover .campus-card-icon,
+  .campus-card:focus-within .campus-card-icon,
+  .campus-card:active .campus-card-icon {
+    background: linear-gradient(135deg, #16a085 0%, #e67e22 100%);
+    color: #fff;
+    box-shadow: 0 4px 24px #e67e2255, 0 2px 8px #16a08522;
+    border: 2px solid #16a085;
+  }
+  .campus-card-content h3 {
+    font-size: 1.13rem;
+    font-weight: 800;
+    color: #16a085;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.2px;
+    font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+    text-shadow: 0 1px 0 #fff8, 0 2px 8px #16a08511;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .campus-card-content p, .campus-card-content ul {
+    font-size: 1.01rem;
+    color: #16a085;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .campus-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .campus-features-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #e67e22;
+    font-weight: 600;
+    font-size: 1.01rem;
+  }
+  .campus-features-list i {
+    color: #16a085;
+    font-size: 1.1rem;
+    min-width: 18px;
+  }
+  .campus-card-img {
+    width: 100%;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 2px 8px #16a08522;
+    animation: campusImgPop 0.9s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  /* .campus-gallery-btn styles removed */
+  @media (max-width: 900px) {
+    .campus-life-cards {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .campus-card {
+      min-width: 98vw;
+      max-width: 98vw;
+      margin: 0.7rem auto;
+    }
+  }
+</style>
+<script>
+  // Campus Gallery Modal logic removed
+</script>
+
+<section id="contact" class="container" style="background:#f8f9fa;padding:2rem 1rem;margin:2rem auto 3rem;border-radius:12px;max-width:1100px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+  <h2 style="text-align:center;color:#003366;margin-bottom:1.5rem;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;">Contact Us</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:center;">
+    <div style="flex:1 1 320px;min-width:250px;">
+      <h3 style="color:#16a085;font-size:1.2rem;margin-bottom:0.7rem;">Get in Touch</h3>
+      <p><i class="fas fa-envelope" style="color:#a32638;margin-right:8px;"></i><strong>Email:</strong> <a href="mailto:info@icstuniversitypark.edu" style="color:#003366;text-decoration:underline;">info@icstuniversitypark.edu</a></p>
+      <p><i class="fas fa-phone" style="color:#e67e22;margin-right:8px;"></i><strong>Phone:</strong> <a href="tel:+1234567890" style="color:#003366;text-decoration:underline;">+123 456 7890</a></p>
+      <p><i class="fas fa-map-marker-alt" style="color:#16a085;margin-right:8px;"></i><strong>Address:</strong> 123 University Avenue, City, Country</p>
+      <p style="margin-top:1.2rem;"><i class="fas fa-clock" style="color:#e6b012;margin-right:8px;"></i><strong>Office Hours:</strong> Mon - Fri, 9:00 AM - 5:00 PM</p>
+    </div>
+    <div style="flex:1 1 320px;min-width:250px;">
+      <h3 style="color:#a32638;font-size:1.2rem;margin-bottom:0.7rem;">Send Us a Message</h3>
+      <form id="contactForm" style="display:flex;flex-direction:column;gap:0.7rem;">
+        <input type="text" id="contactName" placeholder="Your Name" required style="padding:0.7rem 1rem;border-radius:6px;border:1px solid #e6b012;">
+        <input type="email" id="contactEmail" placeholder="Your Email" required style="padding:0.7rem 1rem;border-radius:6px;border:1px solid #e6b012;">
+        <textarea id="contactMsg" placeholder="Your Message" rows="3" required style="padding:0.7rem 1rem;border-radius:6px;border:1px solid #e6b012;resize:vertical;"></textarea>
+        <button type="submit" style="background:linear-gradient(90deg,#16a085,#e67e22);color:#fff;font-weight:700;border:none;border-radius:6px;padding:0.7rem 1rem;box-shadow:0 2px 8px #e67e2233;cursor:pointer;">Send Message</button>
+        <span id="contactStatus" style="min-height:1.2em;font-size:1rem;font-weight:500;"></span>
+      </form>
+      <div style="margin-top:1.5rem;">
+        <h3 style="color:#003366;font-size:1.1rem;margin-bottom:0.5rem;">Follow Us</h3>
+        <a href="#" style="color:#003366;margin-right:1rem;"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="#" style="color:#003366;margin-right:1rem;"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="#" style="color:#003366;"><i class="fab fa-linkedin fa-lg"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  // Contact form feedback animation
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const contactStatus = document.getElementById('contactStatus');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        contactStatus.style.color = '#28a745';
+        contactStatus.textContent = "Thank you! Your message has been sent.";
+        contactForm.reset();
+        setTimeout(() => { contactStatus.textContent = ""; }, 3500);
+      });
+    }
+  });
+</script>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="login-modal">
+  <div class="modal-content">
+    <span class="close" data-close>&times;</span>
+    <h2>Login</h2>
+    <form>
+      <label>Email</label>
+      <input type="email" placeholder="Enter email" required />
+      <label>Password</label>
+      <input type="password" placeholder="Enter password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up here</a></p>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div class="modal" id="signup-modal">
+  <div class="modal-content">
+    <span class="close" data-close>&times;</span>
+    <h2>Sign Up</h2>
+    <form>
+      <label>Name</label>
+      <input type="text" placeholder="Your name" required />
+      <label>Email</label>
+      <input type="email" placeholder="Your email" required />
+      <label>Password</label>
+      <input type="password" placeholder="Create password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="#" id="switch-to-login">Log in here</a></p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 ICST University Park. All rights reserved.
+</footer>
+
+<script>
+  // Academic Program box interactivity
+  document.addEventListener('DOMContentLoaded', function() {
+    const programBoxes = document.querySelectorAll('.program-box');
+    programBoxes.forEach(box => {
+      box.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return;
+        if (this.classList.contains('active')) {
+          this.classList.remove('active');
+        } else {
+          programBoxes.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+      box.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // Header button and social icon ripple effect
+    document.querySelectorAll('.header-buttons button, .social-icons img').forEach(el => {
+      el.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = (e.offsetX || 10) + 'px';
+        ripple.style.top = (e.offsetY || 10) + 'px';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Modal logic
+    const loginModal = document.getElementById("login-modal");
+    const signupModal = document.getElementById("signup-modal");
+    const openLogin = document.getElementById("open-login");
+    const openSignup = document.getElementById("open-signup");
+    const switchToSignup = document.getElementById("switch-to-signup");
+    const switchToLogin = document.getElementById("switch-to-login");
+
+    if (openLogin) openLogin.onclick = (e) => {
+      e.preventDefault();
+      loginModal.style.display = "block";
+      setTimeout(() => loginModal.querySelector('input[type=email]').focus(), 200);
+    };
+    if (openSignup) openSignup.onclick = (e) => {
+      e.preventDefault();
+      signupModal.style.display = "block";
+      setTimeout(() => signupModal.querySelector('input[type=text]').focus(), 200);
+    };
+    if (switchToSignup) switchToSignup.onclick = (e) => {
+      e.preventDefault();
+      loginModal.style.display = "none";
+      signupModal.style.display = "block";
+      setTimeout(() => signupModal.querySelector('input[type=text]').focus(), 200);
+    };
+    if (switchToLogin) switchToLogin.onclick = (e) => {
+      e.preventDefault();
+      signupModal.style.display = "none";
+      loginModal.style.display = "block";
+      setTimeout(() => loginModal.querySelector('input[type=email]').focus(), 200);
+    };
+    document.querySelectorAll("[data-close]").forEach((el) =>
+      el.addEventListener("click", () => {
+        loginModal.style.display = "none";
+        signupModal.style.display = "none";
+      })
+    );
+       window.onclick = function (event) {
+      if (event.target == loginModal || event.target == signupModal) {
+        loginModal.style.display = "none";
+        signupModal.style.display = "none";
+      }
+    };
+
+    // Admissions form animation and feedback
+    const admissionForm = document.getElementById('admissionForm');
+    if (admissionForm) {
+      admissionForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('admissionName').value.trim();
+        const email = document.getElementById('admissionEmail').value.trim();
+        const program = document.getElementById('admissionProgram').value.trim();
+        const message = document.getElementById('admissionMessage');
+        if (!name || !email || !program) {
+          message.style.color = '#d32f2f';
+          message.innerText = 'Please fill all required fields.';
+          return;
+        }
+        message.style.color = '#28a745';
+        message.innerText = `Thank you, ${name}! Your application for ${program.toUpperCase()} has been received.`;
+        this.reset();
+        this.classList.remove('pop');
+        void this.offsetWidth;
+        this.classList.add('pop');
+        setTimeout(() => this.classList.remove('pop'), 700);
+      });
+    }
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navUl = document.querySelector('.main-nav .bottom-links');
+    function toggleMenu() {
+      navUl.classList.toggle('active');
+    }
+    if (hamburger) hamburger.addEventListener('click', toggleMenu);
+    window.addEventListener('resize', function() {
+      if(window.innerWidth > 900) navUl.classList.remove('active');
+    });
+    function checkHamburger() {
+      if (hamburger)
+        hamburger.style.display = window.innerWidth <= 900 ? 'block' : 'none';
+    }
+    window.addEventListener('resize', checkHamburger);
+    checkHamburger();
+  });
+
+  // Add ripple effect CSS if not already present
+  if (!document.getElementById('ripple-style')) {
+    const rippleStyle = document.createElement('style');
+    rippleStyle.id = 'ripple-style';
+    rippleStyle.innerHTML = `.ripple { position: absolute; border-radius: 50%; background: #007bff55; pointer-events: none; width: 40px; height: 40px; transform: scale(0); animation: rippleAnim 0.6s linear; z-index: 2; }
+    @keyframes rippleAnim { to { transform: scale(2.5); opacity: 0; } }`;
+    document.head.appendChild(rippleStyle);
+  }
+</script>
+<style>
+  @media (max-width: 900px) {
+    #hamburger { display: block !important; }
+    .main-nav .bottom-links {
+      display: none;
+      flex-direction: column;
+      background: #222;
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 100vw;
+      z-index: 1200;
+      padding: 1rem 0;
+    }
+    .main-nav .bottom-links.active {
+      display: flex;
+    }
+  }
+</style>
+</body>
+</html>
